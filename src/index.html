@@ -1,0 +1,55 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>测试HTml</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<script type="text/javascript" src="../js/jquery-1.7.2.min.js"></script>
+<body>
+
+  <p>Hello world! This is HTML5 Boilerplate.</p>
+  <div class="login">
+    <h1>管理登录</h1>
+    <form method="post" action="">
+      <p>
+        <input type="text" name="username" value="" placeholder="请输入用户名" id="username">
+      </p>
+      <p>
+        <input type="password" name="password" value="" placeholder="请输入密码" id="password">
+      </p>
+      <p>
+        <span style="float:right"><input type="button" value="登录" id="login"></span>
+      </p>
+    </form>
+  </div>
+
+  <script>
+    $(function(){
+      $("#login").click(function(){
+        $.ajax({
+          type: 'post',
+          url: 'http://localhost:8085/admin/login',
+          data: JSON.stringify({
+            'username':$("#username").val(),
+            'password':$("#password").val()
+          }),
+          dataType:'json',
+          contentType: "application/json;charset-UTF-8",
+          success: function(data){
+            if(data.message){
+              alert('提示     '+data.message);
+            }else if(data.isSuccess){
+             alert("登录成功")
+            }
+          },
+          error: function(jqXHR, textStatus, errorThrown){
+          }
+        });
+      });
+    })
+  </script>
+</body>
+
+</html>
